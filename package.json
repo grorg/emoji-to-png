@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fontkit": "^1.7.7"
+    "fontkit": "^1.8.0"
   }
 }

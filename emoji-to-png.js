@@ -23,19 +23,12 @@ async function saveImagesForEmoji(inputString) {
         process.exit(1);
     }
     const font = fontCollection.fonts[0];
-    // FIXME: This should use font.glyphsForString(string) - and
-    // handle multiple code points per glyph
-    for (let character of inputString) {
-        const codePoint = character.codePointAt(0);
-        if (!font.hasGlyphForCodePoint(codePoint)) {
-            console.log(`${character} not available in emoji font.`);
-            continue;
-        }
-        const glyph = font.glyphForCodePoint(codePoint);
-        const imageFileName = `${codePoint.toString(16).toUpperCase()}.png`;
+    const run = font.layout(inputString);
+    for (let glyph of run.glyphs) {
+        const imageFileName = glyph.codePoints.map(codePoint => codePoint.toString(16).toUpperCase()).join("-") + ".png";
         // FIXME: Get the character name
         // http://unicode.org/Public/UNIDATA/UnicodeData.txt
-        console.log(`${character} -> ${imageFileName}`);
+        console.log(`output -> ${imageFileName}`);
         const img = glyph.getImageForSize(2000);
         await writeDataToFile(imageFileName, img.data);
     }
