@@ -5,7 +5,8 @@ const util = require("util");
 const openFont = util.promisify(fontkit.open);
 const writeDataToFile = util.promisify(fs.writeFile);
 
-const emojiFont = "/System/Library/Fonts/Apple Color Emoji.ttc";
+//const emojiFont = "/System/Library/Fonts/Apple Color Emoji.ttc";
+const emojiFont = "ugly-emoji.ttc";
 
 function usage() {
     console.log(`Usage: node ${process.argv[1]} string`);
